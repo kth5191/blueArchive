@@ -1,4 +1,6 @@
-  const characters = [
+const PROJECT_NAME = 'blueArchive'; // GitHub 프로젝트 이름을 여기에 입력하세요
+
+const characters = [
 '나기사', '나츠', '네루', '네루(바니걸)', '노노미', '노노미(수영복)', '노도카', '노도카(온천)', '노아', '레이사', 
 '레이죠', '렌게', '루미', '마리', '마리(아이돌)', '마리(체육복)', '마리나', '마리나(치파오)', '마시로', '마시로(수영복)', 
 '마코토', '마키', '메구', '메루', '모모이', '모모이(메이드)', '모미지', '모에', '모에(수영복)', '무츠키', '무츠키(새해)', 
@@ -23,7 +25,7 @@
 ].map((name, index) => ({
   id: `${index + 1}`,
   name,
-  imageUrl: `https://kth5191.github.io/blueArchive/src/images/${String(index + 1).padStart(3, '0')}`
+  imageUrl: `/${PROJECT_NAME}/images/${String(index + 1).padStart(3, '0')}`
 }));
 
 export default characters;
