@@ -23,7 +23,7 @@
 ].map((name, index) => ({
   id: `${index + 1}`,
   name,
-  imageUrl: `images/${String(index + 1).padStart(3, '0')}`
+  imageUrl: `https://kth5191.github.io/blueArchive/src/images/${String(index + 1).padStart(3, '0')}`
 }));
 
 export default characters;
