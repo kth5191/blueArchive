@@ -1,4 +1,4 @@
-const characters = [
+  const characters = [
 '나기사', '나츠', '네루', '네루(바니걸)', '노노미', '노노미(수영복)', '노도카', '노도카(온천)', '노아', '레이사', 
 '레이죠', '렌게', '루미', '마리', '마리(아이돌)', '마리(체육복)', '마리나', '마리나(치파오)', '마시로', '마시로(수영복)', 
 '마코토', '마키', '메구', '메루', '모모이', '모모이(메이드)', '모미지', '모에', '모에(수영복)', '무츠키', '무츠키(새해)', 
@@ -23,7 +23,7 @@ const characters = [
 ].map((name, index) => ({
   id: `${index + 1}`,
   name,
-  imageUrl: `/images/${String(index + 1).padStart(3, '0')}`
+  imageUrl: `images/${String(index + 1).padStart(3, '0')}`
 }));
 
 export default characters;
