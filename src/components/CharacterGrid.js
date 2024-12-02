@@ -108,7 +108,7 @@ function CharacterGrid() {
             className={`student-item ${selectedStudents.has(student.student_id.toString()) ? 'selected' : ''} ${student.student_id.toString() === lastSelectedStudent ? 'last-selected' : ''}`}
             onClick={() => toggleStudent(student.student_id.toString())}
           >
-            <img src={"http://kth5191.github.io/public/"+student.thumbnail1} alt={student.name} />
+            <img src={"http://kth5191.github.io/"+student.thumbnail1} alt={student.name} />
             <div className="student-name">{student.name}</div>
             {student.student_id.toString() === lastSelectedStudent && <div className="last-selected-indicator">마지막 당번</div>}
           </div>
