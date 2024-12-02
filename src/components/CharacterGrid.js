@@ -110,7 +110,6 @@ function CharacterGrid() {
           >
             <img src={student.thumbnail1+".webp"} alt={student.name} />
             <div className="character-name">{student.name}</div>
-            {student.student_id.toString() === lastSelectedStudent && <div className="last-selected-indicator">마지막 당번</div>}
           </div>
         ))}
       </div>
@@ -133,9 +132,8 @@ function CharacterGrid() {
         <DialogContent>
           {randomStudent && (
             <div className="random-student">
-              <img src={randomStudent.thumbnail2} alt={randomStudent.name} />
+              <img src={randomStudent.thumbnail2+".webp"} alt={randomStudent.name} />
               <p>{randomStudent.name}</p>
-              <p>생일: {randomStudent.birth_date}</p>
             </div>
           )}
         </DialogContent>
