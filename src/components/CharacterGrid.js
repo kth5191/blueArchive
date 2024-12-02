@@ -105,7 +105,7 @@ function CharacterGrid() {
         {filteredStudents.map((student) => (
           <div
             key={student.student_id}
-            className={`student-item ${selectedStudents.has(student.student_id.toString()) ? 'selected' : ''} ${student.student_id.toString() === lastSelectedStudent ? 'last-selected' : ''}`}
+            className={`character-item ${selectedStudents.has(student.student_id.toString()) ? 'selected' : ''} ${student.student_id.toString() === lastSelectedStudent ? 'last-selected' : ''}`}
             onClick={() => toggleStudent(student.student_id.toString())}
           >
             <img src={student.thumbnail1+".webp"} alt={student.name} />

@@ -1,125 +1,75 @@
-.student-grid {
+.character-grid {
   padding: 20px;
   background-color: #e6f3ff;
   min-height: 100vh;
 }
 
-.student-grid h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
 .button-container {
-  display: flex;
-  justify-content: center;
   margin-bottom: 20px;
 }
 
 .button-container button {
-  margin: 0 10px;
+  margin-right: 10px;
 }
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 15px;
-  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
 }
 
-.student-item {
+.character-item {
   position: relative;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   border-radius: 8px;
   overflow: hidden;
-  opacity: 0.6;
-  width: 100%;
-  padding-top: 100%; /* Creates a square aspect ratio */
+  opacity: 0.6; /* 선택되지 않은 이미지를 희미하게 만듭니다 */
 }
 
-.student-item:hover,
-.student-item.selected {
-  opacity: 1;
+.character-item:hover,
+.character-item.selected {
+  opacity: 1; /* 마우스를 올리거나 선택된 경우 원래 상태로 복구합니다 */
 }
 
-.student-item:hover {
+
+.character-item:hover {
   box-shadow: 0 0 0 2px black;
 }
 
-.student-item.selected,
-.student-item.selected:hover {
+.character-item.selected,
+.character-item.selected:hover {
   box-shadow: 0 0 0 4px #2196f3;
 }
 
-.student-item img {
-  position: absolute;
-  top: 0;
-  left: 0;
+.character-item img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  display: block;
 }
 
-.student-name {
+.character-name {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
-  padding: 5px;
-  text-align: center;
+  padding: 4px;
   font-size: 12px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-align: center;
 }
 
-.last-selected-indicator {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  background-color: #ff9800;
-  color: white;
-  padding: 2px 5px;
-  font-size: 10px;
-  border-radius: 3px;
-}
-
-.random-student {
+.random-character {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
 }
 
-.random-student img {
-  width: 100%;
-  max-width: 200px;
+.random-character img {
+  width: 200px;
   height: auto;
   border-radius: 8px;
   margin-bottom: 10px;
-}
-
-.random-student p {
-  margin: 5px 0;
-}
-
-/* Additional styles for Material-UI components */
-.MuiCircularProgress-root {
-  display: block;
-  margin: 20px auto;
-}
-
-.MuiDialog-paper {
-  min-width: 300px;
-}
-
-.MuiDialogTitle-root {
-  background-color: #f5f5f5;
-}
-
-.MuiDialogContent-root {
-  padding: 20px;
 }
 
