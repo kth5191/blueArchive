@@ -109,7 +109,7 @@ function CharacterGrid() {
             onClick={() => toggleStudent(student.student_id.toString())}
           >
             <img src={student.thumbnail1+".webp"} alt={student.name} />
-            <div className="student-name">{student.name}</div>
+            <div className="character-name">{student.name}</div>
             {student.student_id.toString() === lastSelectedStudent && <div className="last-selected-indicator">마지막 당번</div>}
           </div>
         ))}
