@@ -1,6 +1,6 @@
-.character-grid {
+.student-grid {
   padding: 20px;
-  background-color: #e6f3ff;
+  background-image: url("/public/images/backgroundImage/Growth_Bg.webp");
   min-height: 100vh;
 }
 
