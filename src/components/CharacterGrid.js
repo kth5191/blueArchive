@@ -132,7 +132,7 @@ function CharacterGrid() {
           '& .MuiDialog-paper': {
             width: '1280px',
             maxWidth: 'none', // 최대 너비 제한을 없앰
-            height: '800px',
+            height: '860px',
           },
         }}
         >
