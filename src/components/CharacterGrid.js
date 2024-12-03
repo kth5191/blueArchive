@@ -58,14 +58,28 @@ function CharacterGrid() {
   };
 
   const selectRandomStudent = () => {
-    const selectedArray = Array.from(selectedStudents).filter(id => id !== lastSelectedStudent);
+    let selectedArray = [];
+  
+    // selectedStudents에 2명 이상 있는 경우, lastSelectedStudent를 제외한 배열 생성
+    if (selectedStudents.size >= 2) {
+      selectedArray = Array.from(selectedStudents).filter(
+        (id) => id !== lastSelectedStudent
+      );
+    } else {
+      // 그렇지 않은 경우 selectedStudents 배열을 그대로 사용
+      selectedArray = Array.from(selectedStudents);
+    }
+  
+    // 랜덤으로 학생 ID 선택
     if (selectedArray.length > 0) {
       const randomId = selectedArray[Math.floor(Math.random() * selectedArray.length)];
-      const student = students.find(s => s.student_id.toString() === randomId);
+      const student = students.find((s) => s.student_id.toString() === randomId);
+  
+      // 학생이 존재할 경우 상태 업데이트
       if (student) {
-        setRandomStudent(student);
-        setLastSelectedStudent(student.student_id.toString());
-        setIsModalOpen(true);
+        setRandomStudent(student); // 랜덤으로 선택된 학생 상태 업데이트
+        setLastSelectedStudent(student.student_id.toString()); // 마지막 선택된 학생 ID 업데이트
+        setIsModalOpen(true); // 모달을 열어 선택된 학생을 표시
       }
     }
   };
@@ -113,8 +127,25 @@ function CharacterGrid() {
           </div>
         ))}
       </div>
-      <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <DialogTitle sx={{ m: 0, p: 2 }}>
+      <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)}
+        sx={{
+          '& .MuiDialog-paper': {
+            width: '1280px',
+            maxWidth: 'none', // 최대 너비 제한을 없앰
+            height: '800px',
+          },
+        }}
+        >
+        <DialogTitle 
+          sx={{ 
+            m: 0, 
+            p: 2, 
+            textAlign: 'center', 
+            position: 'relative',
+            backgroundColor: 'rgba(0, 0, 0, 0.03)',
+            borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+          }}
+        >
           오늘의 당번
           <IconButton
             aria-label="close"
@@ -131,7 +162,7 @@ function CharacterGrid() {
         </DialogTitle>
         <DialogContent>
           {randomStudent && (
-            <div className="random-student">
+            <div className="random-character">
               <img src={randomStudent.thumbnail2+".webp"} alt={randomStudent.name} />
               <p>{randomStudent.name}</p>
             </div>
