@@ -24,12 +24,20 @@ function CharacterGrid() {
   }, []);
 
   useEffect(() => {
-    setCookie('selectedStudents', Array.from(selectedStudents));
+    // `selectedStudents` 쿠키 설정: 만료 날짜 2038년 1월 19일로 설정
+    setCookie('selectedStudents', Array.from(selectedStudents), {
+      expires: new Date('2038-01-19T03:14:07Z'), // 쿠키 만료일 설정
+      path: '/', // 경로 설정
+    });
   }, [selectedStudents]);
 
   useEffect(() => {
     if (lastSelectedStudent) {
-      setCookie('lastSelectedStudent', lastSelectedStudent);
+      // `lastSelectedStudent` 쿠키 설정: 만료 날짜 2038년 1월 19일로 설정
+      setCookie('lastSelectedStudent', lastSelectedStudent, {
+        expires: new Date('2038-01-19T03:14:07Z'), // 쿠키 만료일 설정
+        path: '/', // 경로 설정
+      });
     }
   }, [lastSelectedStudent]);
 
