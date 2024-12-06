@@ -43,7 +43,7 @@ function CharacterGrid() {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/students');
+      const response = await axios.get('https://holy-willow-kdhcompany-277b699c.koyeb.app/api/students');
       setStudents(response.data);
       setIsLoading(false);
     } catch (error) {
