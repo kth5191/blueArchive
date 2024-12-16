@@ -56,8 +56,7 @@ function CharacterGrid() {
   // 학생 데이터를 API에서 가져옴
   const fetchStudents = async () => {
     try {
-      // const response = await axios.get('https://holy-willow-kdhcompany-277b699c.koyeb.app/api/students');
-      const response = await axios.get('http://localhost:5000/api/students');
+      const response = await axios.get('https://holy-willow-kdhcompany-277b699c.koyeb.app/api/students');
       setStudents(response.data);
       setIsLoading(false);
     } catch (error) {
