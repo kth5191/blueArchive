@@ -1,0 +1,92 @@
+.student-grid {
+  padding: 20px;
+  background-image: url("/public/images/backgroundImage/Growth_Bg.webp");
+  min-height: 100vh;
+}
+
+.button-container {
+  margin-bottom: 20px;
+}
+
+.button-container button {
+  margin-right: 10px;
+}
+
+.buttonGroup-container button {
+  margin: 0px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.grid-modal {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.character-item {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border-radius: 8px;
+  overflow: hidden;
+  opacity: 0.6; /* 선택되지 않은 이미지를 희미하게 만듭니다 */
+}
+
+.random-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.character-item:hover,
+.character-item.selected {
+  opacity: 1; /* 마우스를 올리거나 선택된 경우 원래 상태로 복구합니다 */
+}
+
+
+.character-item:hover {
+  box-shadow: 0 0 0 4px black;
+}
+
+.character-item.selected,
+.character-item.selected:hover {
+  box-shadow: 0 0 0 4px #2196f3;
+}
+
+.character-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.character-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 4px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.random-character {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+}
+
+.random-character img {
+  width: 800px;
+  height: 610px;
+  border-radius: 8px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
