@@ -1,5 +1,4 @@
 import React from 'react';
-import { CookiesProvider } from 'react-cookie';
 import CharacterGrid from './components/CharacterGrid';
 import './App.css';
 
