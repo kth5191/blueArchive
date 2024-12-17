@@ -3,7 +3,7 @@ import axios from 'axios';
 import { 
   Button, Dialog, DialogContent, DialogTitle, IconButton, 
   CircularProgress, ButtonGroup, Popper, Grow, Paper, 
-  MenuItem, MenuList, ClickAwayListener 
+  MenuItem, MenuList, ClickAwayListener, useMediaQuery, useTheme
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -29,6 +29,8 @@ function CharacterGrid() {
   const [error, setError] = useState(null); // 에러 상태
   const [numberOfStudentsToSelect, setNumberOfStudentsToSelect] = useState(2); // 다수 선택 시 학생 수
   const anchorRef = useRef(null); // 드롭다운 버튼 참조
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   // 학생 데이터 가져오기
   useEffect(() => {
@@ -304,7 +306,7 @@ function CharacterGrid() {
           ) : (
             randomStudent && (
               <div className="random-character">
-                <img src={`${randomStudent.thumbnail2}.webp`} alt={randomStudent.name} />
+                <img src={`${isMobile ? randomStudents[0].thumbnail1 : randomStudents[0].thumbnail2}.webp`} alt={randomStudent.name} />
                 <p>{randomStudent.name}</p>
               </div>
             )
