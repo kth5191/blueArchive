@@ -309,8 +309,8 @@ function CharacterGrid() {
                 
                 <img src={`${isMobile ? randomStudent.thumbnail1 : randomStudent.thumbnail2}.webp`} alt={randomStudent.name} 
                   style={{
-                    width: isMobile ? '100px' : auto,
-                    height: isMobile ? '100px' : auto
+                    width: isMobile ? '100px' : 'auto',
+                    height: isMobile ? '100px' : 'auto'
                 }}/>
                 <p>{randomStudent.name}</p>
               </div>
