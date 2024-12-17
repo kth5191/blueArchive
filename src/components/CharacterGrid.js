@@ -306,7 +306,8 @@ function CharacterGrid() {
           ) : (
             randomStudent && (
               <div className="random-character">
-                <img src={`${isMobile ? randomStudents[0].thumbnail1 : randomStudents[0].thumbnail2}.webp`} alt={randomStudent.name} />
+                
+                <img src={`${isMobile ? randomStudent.thumbnail1 : randomStudent.thumbnail2}.webp`} alt={randomStudent.name} />
                 <p>{randomStudent.name}</p>
               </div>
             )
