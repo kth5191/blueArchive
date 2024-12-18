@@ -1,0 +1,72 @@
+  .student-modal .MuiDialog-paper{
+    width: 1280px;
+    max-width: none;
+    height: 860px;
+  }
+  
+  .student-modal-title {
+    margin: 0;
+    padding: 16px;
+    text-align: center;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  
+  .student-modal-close-button {
+    position: absolute !important;
+    right: 8px !important;
+    top: 8px !important;
+    color: rgba(0, 0, 0, 0.54) !important;
+  }
+  
+  .student-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 150px);
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 50px;
+    max-width: 800px;
+  }
+  
+  .character-items {
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .character-items img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .character-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 4px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .random-character {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+  }
+  
+  .random-character img {
+    border-radius: 8px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    width: 800px;
+    height: 610px;
+  }

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import StudentModal from './StudentModal';
 import { 
-  Button, Dialog, DialogContent, DialogTitle, IconButton, 
-  CircularProgress, ButtonGroup, Popper, Grow, Paper, 
+  Button, CircularProgress, ButtonGroup, Popper, Grow, Paper, 
   MenuItem, MenuList, ClickAwayListener, useMediaQuery, useTheme
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { setCookie, getCookie } from '../utils/cookieUtils';
+import './CharacterGrid.css';
 
 function CharacterGrid() {
   // State variables
@@ -249,75 +249,13 @@ function CharacterGrid() {
         ))}
       </div>
 
-      {/* 모달 */}
-      <Dialog
-        open={isModalOpen}
+      <StudentModal
+        isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        sx={{
-          '& .MuiDialog-paper': {
-            width: '1280px',
-            maxWidth: 'none',
-            height: '860px',
-          },
-        }}
-      >
-        <DialogTitle
-          sx={{
-            m: 0,
-            p: 2,
-            textAlign: 'center',
-            position: 'relative',
-            backgroundColor: 'rgba(0, 0, 0, 0.03)',
-            borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
-          }}
-        >
-          오늘의 당번
-          <IconButton
-            aria-label="close"
-            onClick={() => setIsModalOpen(false)}
-            sx={{
-              position: 'absolute',
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent>
-          {isMultipleSelectionMode ? (
-            <div 
-              className="grid-container" 
-              style={{display: 'grid', gridTemplateColumns: 'repeat(5, 150px)', gap: '20px', justifyContent: 'center', alignItems: 'center', margin: '0 auto', padding: '50px', maxWidth: '800px'}}
-            >
-              {randomStudents.map((student) => (
-                <div
-                  key={student.student_id}
-                  className={`character-item ${
-                    selectedStudents.has(student.student_id.toString()) ? 'selected' : ''
-                  }`}
-                >
-                  <img src={`${student.thumbnail1}.webp`} alt={student.name} />
-                  <div className="character-name">{student.name}</div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            randomStudent && (
-              <div className="random-character">
-                
-                <img src={`${isMobile ? randomStudent.thumbnail1 : randomStudent.thumbnail2}.webp`} alt={randomStudent.name} 
-                  style={{
-                    width: isMobile ? '100px' : '800px',
-                    height: isMobile ? '100px' : '610px'
-                }}/>
-                <p>{randomStudent.name}</p>
-              </div>
-            )
-          )}
-        </DialogContent>
-      </Dialog>
+        isMultipleSelectionMode={isMultipleSelectionMode}
+        randomStudents={randomStudents}
+        randomStudent={randomStudent}
+      />
     </div>
   );
 }
