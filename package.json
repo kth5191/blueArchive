@@ -1,8 +1,8 @@
 {
-  "name": "my-app",
+  "name": "today-schale",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://today-schale.duckdns.org/blueArchive",
+  "homepage": "https://today-schale.duckdns.org",
   "dependencies": {
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
