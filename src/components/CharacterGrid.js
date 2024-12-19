@@ -63,7 +63,7 @@ function CharacterGrid() {
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching students:', error);
-      setError('Failed to fetch students. Please try again later.');
+      setError('오류가 발생했습니다. 잠시만 기다려주세요.');
       setIsLoading(false);
     }
   };
@@ -124,6 +124,23 @@ function CharacterGrid() {
     setRandomStudents(selectedStudentObjects);
     setIsMultipleSelectionMode(true);
     setIsModalOpen(true);
+  };
+
+  // 모든 학생 중 단일 학생 랜덤 선택
+  const selectAllRandomStudent = () => {
+    if (students.length === 0) {
+      alert('오류가 발생했습니다. 잠시만 기달려주세요.');
+      return;
+    }
+
+    const student = students[Math.floor(Math.random() * students.length)];
+
+    if (student) {
+      setRandomStudent(student);
+      setIsMultipleSelectionMode(false);
+      setLastSelectedStudent(student.student_id.toString());
+      setIsModalOpen(true);
+    }
   };
 
   // 배열에서 랜덤으로 N개의 요소 선택
@@ -231,6 +248,15 @@ function CharacterGrid() {
             </Grow>
           )}
         </Popper>
+
+        <Button
+          onClick={selectAllRandomStudent}
+          variant="contained"
+          color="primary"
+          disabled={students.length === 0 || isLoading}
+        >
+          All Random(단일)
+        </Button>
       </div>
 
       {/* 학생 리스트 */}
@@ -256,7 +282,30 @@ function CharacterGrid() {
         randomStudents={randomStudents}
         randomStudent={randomStudent}
       />
+
+      <div className="href-container">
+        <a 
+          href="https://naver.me/GNWSIlCm" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="href-link"
+        >
+          Feedback
+        </a>
+
+        <a 
+          href="https://burly-lobster-097.notion.site/17023e52a66b49bc88f7ce103901042a?v=67f48e866fe140acaefdc2eec49fcd6b&pvs=4" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="href-link"
+        >
+          이슈 보드
+        </a>
+      </div>
+
     </div>
+
+    
   );
 }
 

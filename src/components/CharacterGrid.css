@@ -9,6 +9,7 @@
   }
   
   .button-container button {
+    margin-left: 10px;
     margin-right: 10px;
   }
   
@@ -64,4 +65,23 @@
     text-align: center;
   }
   
+  .href-container {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
   
+  .href-link {
+    color: #0066cc;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .href-link:hover {
+    text-decoration: underline;
+  }
