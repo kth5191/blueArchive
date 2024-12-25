@@ -85,3 +85,16 @@
   .href-link:hover {
     text-decoration: underline;
   }
+
+  .error-grid {
+    background-image: url('https://kth5191.github.io/blueArchive/images/backgroundImage/Growth_Bg.webp');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column; /* 세로 방향 정렬 */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    height: 100vh;
+  }

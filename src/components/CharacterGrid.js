@@ -20,17 +20,22 @@ function CharacterGrid() {
   const [randomStudent, setRandomStudent] = useState(null); // 랜덤으로 선택된 학생
   const [randomStudents, setRandomStudents] = useState([]); // 다수 랜덤으로 선택된 학생들
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
+
   const [open, setOpen] = useState(false); // 드롭다운 상태
+  const [arOpen, setAROpen] = useState(false); // AR 드롭다운 상태
+
   const [isMultipleSelectionMode, setIsMultipleSelectionMode] = useState(false); // 다수 선택 모드
   const [lastSelectedStudent, setLastSelectedStudent] = useState(() => {
     return getCookie('lastSelectedStudent') || null;
   }); // 마지막으로 선택된 학생
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태
   const [error, setError] = useState(null); // 에러 상태
+
   const [numberOfStudentsToSelect, setNumberOfStudentsToSelect] = useState(2); // 다수 선택 시 학생 수
+  const [numberOfStudentsToARSelect, setNumberOfStudentsToARSelect] = useState(2); // AR 다수 선택 시 학생 수
+
   const anchorRef = useRef(null); // 드롭다운 버튼 참조
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const arAnchorRef = useRef(null); // 드롭다운 버튼 참조
 
   // 학생 데이터 가져오기
   useEffect(() => {
@@ -143,9 +148,46 @@ function CharacterGrid() {
     }
   };
 
+  // 모든 학생 중 다수 학생 랜덤 선택
+  const selectAllRandomStudents = () => {
+    if (!students || students.length === 0) {
+      console.error("No students available.");
+      return;
+    }
+  
+    // `studentsArray`에서 랜덤으로 ID를 선택
+    const studentsArray = students.map((s) => s.student_id.toString());
+    const newStudentIds = getRandomElements(studentsArray, numberOfStudentsToARSelect);
+  
+    // ID를 기반으로 학생 객체를 찾아 매핑
+    const randomStudentObjects = newStudentIds
+      .map((id) => students.find((s) => s.student_id.toString() === id))
+      .filter(Boolean); // 유효하지 않은 객체 제거
+  
+    if (randomStudentObjects.length > 0) {
+      setRandomStudents(randomStudentObjects);
+      setIsMultipleSelectionMode(true);
+      setIsModalOpen(true);
+    } else {
+      console.error("No random students found.");
+    }
+  };
+  
+
   // 배열에서 랜덤으로 N개의 요소 선택
   const getRandomElements = (array, n) => {
-    return array.sort(() => 0.5 - Math.random()).slice(0, n);
+    if (n > array.length) {
+      console.warn("Requested more elements than available in the array.");
+      n = array.length; // 요청된 개수가 배열 크기를 초과하지 않도록 제한
+    }
+  
+    const shuffled = [...array]; // 원본 배열을 복사
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const randomIndex = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[i]]; // 요소 교환
+    }
+  
+    return shuffled.slice(0, n); // 상위 N개의 요소 반환
   };
 
   // 드롭다운 메뉴 아이템 클릭
@@ -154,9 +196,20 @@ function CharacterGrid() {
     setOpen(false);
   };
 
+  // AR드롭다운 메뉴 아이템 클릭
+  const handleMenuARItemClick = (event, index) => {
+    setNumberOfStudentsToARSelect(index + 2);
+    setAROpen(false);
+  };
+
   // 드롭다운 열기/닫기 토글
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
+  };
+
+  // 드롭다운 열기/닫기 토글
+  const handleARToggle = () => {
+    setAROpen((prevOpen) => !prevOpen);
   };
 
   // 드롭다운 닫기
@@ -165,6 +218,14 @@ function CharacterGrid() {
       return;
     }
     setOpen(false);
+  };
+
+  // 드롭다운 닫기
+  const handleARClose = (event) => {
+    if (arAnchorRef.current && arAnchorRef.current.contains(event.target)) {
+      return;
+    }
+    setAROpen(false);
   };
 
   // 선택된 학생만 보기
@@ -177,7 +238,22 @@ function CharacterGrid() {
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return (
+      <div className="error-grid">
+        <p>{error}</p>
+        <p>
+          계속해서 오류가 발생 시 이쪽으로 신고해주시기 바랍니다.{' '}
+          <a
+            href="https://naver.me/GNWSIlCm"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="href-link"
+          >
+            Feedback
+          </a>
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -257,6 +333,53 @@ function CharacterGrid() {
         >
           All Random(단일)
         </Button>
+
+        <ButtonGroup
+          className="buttonGroup-container"
+          variant="contained"
+          color="primary"
+          ref={arAnchorRef}
+          aria-label="split button"
+        >
+          <Button onClick={selectAllRandomStudents}>All Random ({numberOfStudentsToARSelect}명)</Button>
+          <Button
+            size="small"
+            aria-controls={open ? 'split-button-menu' : undefined}
+            aria-expanded={open ? 'true' : undefined}
+            aria-haspopup="menu"
+            onClick={handleARToggle}
+          >
+            <ArrowDropDownIcon />
+          </Button>
+        </ButtonGroup>
+
+        {/* 드롭다운 메뉴 */}
+        <Popper open={arOpen} anchorEl={arAnchorRef.current} role={undefined} transition disablePortal placement="top-start" style={{ zIndex: 1300 }}>
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleARClose}>
+                  <MenuList id="split-button-menu">
+                    {[2, 3, 4, 5, 6, 7, 8, 9, 10].map((option, index) => (
+                      <MenuItem
+                        key={option}
+                        selected={option === numberOfStudentsToARSelect}
+                        onClick={(event) => handleMenuARItemClick(event, index)}
+                      >
+                        {option}명
+                      </MenuItem>
+                    ))}
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
       </div>
 
       {/* 학생 리스트 */}
