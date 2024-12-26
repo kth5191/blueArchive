@@ -324,7 +324,10 @@ function CharacterGrid() {
             </Grow>
           )}
         </Popper>
+      </div>
 
+      {/* 버튼 그룹 */}
+      <div className="button-container">
         <Button
           onClick={selectAllRandomStudent}
           variant="contained"
